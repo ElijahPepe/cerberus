@@ -4,7 +4,7 @@ CLI utility for Twitter to take the most recent direct message and validate it f
 
 ## Methodology
 
-This utility checks the most recently received direct message and checks the username against a known RegEx expression for spam accounts. If it matches, the direct message will be deleted.
+This utility checks the most recently received direct message and checks its attributes with those of known spam accounts. If it matches, the direct message will be deleted.
 
 ## Installation
 
