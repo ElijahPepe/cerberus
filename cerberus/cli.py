@@ -10,6 +10,10 @@ def check_username(username):
 	# Prone to change, temporary RegEx check. Very simple, yet effective
 	return bool(re.match(r'.*\d{8}', username))
 
+def check_contents(contents):
+	contents = contents.lower()
+	return "Hello, are you looking for" in contents
+
 class Cerberus:
 	def __init__(self):
 		self.user = dict(
@@ -45,8 +49,11 @@ class Cerberus:
 
 		direct_message = self.client.get_direct_message_events(expansions=['sender_id'])
 		username = direct_message.includes['users'][0].username
+		contents = direct_message.includes['users'][0].text
 		id = direct_message.data[0].id
 		if check_username(username):
+			self.api.delete_direct_message(id)
+		if check_contents(contents):
 			self.api.delete_direct_message(id)
 
 def main():
