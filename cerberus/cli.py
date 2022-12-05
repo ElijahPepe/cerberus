@@ -49,7 +49,7 @@ class Cerberus:
 
 		direct_message = self.client.get_direct_message_events(expansions=['sender_id'])
 		username = direct_message.includes['users'][0].username
-		contents = direct_message.includes['users'][0].text
+		contents = direct_message.data[0].text
 		id = direct_message.data[0].id
 		if check_username(username):
 			self.api.delete_direct_message(id)
