@@ -11,8 +11,8 @@ def check_username(username):
 	return bool(re.match(r'.*\d{8}', username))
 
 def check_contents(contents):
-	contents = contents.lower()
-	return "Hello, are you looking for" in contents
+	phrases = ["Hello, are you looking for", 'Hello, do you need to']
+	return any(x in contents for x in phrases)
 
 class Cerberus:
 	def __init__(self):
