@@ -10,8 +10,12 @@ def check_username(username):
 	# Prone to change, temporary RegEx check. Very simple, yet effective
 	return bool(re.match(r'.*\d{8}', username))
 
-def check_contents(contents):
+def check_contents(contents, args):
 	phrases = ['Hello, are you looking for', 'Hello, do you need to']
+	if args.wordlist:
+		for word in open(args.wordlist, 'r').read().split('\n'):
+			phrases.append(word)
+
 	return any(x in contents for x in phrases)
 
 class Cerberus:
@@ -51,7 +55,7 @@ class Cerberus:
 		username = direct_message.includes['users'][0].username
 		contents = direct_message.data[0].text
 		id = direct_message.data[0].id
-		if check_username(username) or check_contents(contents):
+		if check_username(username) or check_contents(contents, args):
 			self.api.delete_direct_message(id)
 
 def main():
@@ -64,6 +68,8 @@ def main():
 	check_parser.add_argument('--consumer-secret', dest='consumer_secret', action='store', metavar='<consumer secret>')
 	check_parser.add_argument('--access-token', dest='access_token', action='store', metavar='<access token>')
 	check_parser.add_argument('--access-token-secret', dest='access_token_secret', action='store', metavar='<access token secret>')
+
+	check_parser.add_argument('--wordlist', dest='wordlist', action='store', metavar='<wordlist>')
 
 	args, _ = parser.parse_known_args()
 
