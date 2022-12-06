@@ -11,7 +11,7 @@ def check_username(username):
 	return bool(re.match(r'.*\d{8}', username))
 
 def check_contents(contents):
-	phrases = ["Hello, are you looking for", 'Hello, do you need to']
+	phrases = ['Hello, are you looking for', 'Hello, do you need to']
 	return any(x in contents for x in phrases)
 
 class Cerberus:
@@ -51,9 +51,7 @@ class Cerberus:
 		username = direct_message.includes['users'][0].username
 		contents = direct_message.data[0].text
 		id = direct_message.data[0].id
-		if check_username(username):
-			self.api.delete_direct_message(id)
-		if check_contents(contents):
+		if check_username(username) or check_contents(contents):
 			self.api.delete_direct_message(id)
 
 def main():
