@@ -58,7 +58,7 @@ def main():
 	parser = argparse.ArgumentParser(description=f'Cerberus v{__version__}')
 
 	subparsers = parser.add_subparsers(title='Commands', dest='subparser_name', metavar='<command>')
-	check_parser = subparsers.add_parser('check', help='check your DMs')
+	check_parser = subparsers.add_parser('check', help='Check your DMs')
 
 	check_parser.add_argument('--consumer-key', dest='consumer_key', action='store', metavar='<consumer key>')
 	check_parser.add_argument('--consumer-secret', dest='consumer_secret', action='store', metavar='<consumer secret>')
