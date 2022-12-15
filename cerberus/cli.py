@@ -11,7 +11,7 @@ def check_username(username):
 	return bool(re.match(r'.*\d{8}', username))
 
 def check_contents(contents, args):
-	phrases = ['Hello, are you looking for', 'Hello, do you need to']
+	phrases = ['Hello, are you looking for', 'Hello, do you need to', 'Adams']
 	if args.wordlist:
 		for word in open(args.wordlist, 'r').read().split('\n'):
 			phrases.append(word)
